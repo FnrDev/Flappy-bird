@@ -199,7 +199,7 @@ function showGameOverText() {
 }
 
 function checkPipeCollision() {
-  const margin = 6;   // shrink hitbox for fairer feel
+  const margin = 16;
   for (const pipe of pipes) {
     const inPipeX = bird.x + bird.width - margin > pipe.x && bird.x + margin < pipe.x + pipeWidth;
     const hitTop = bird.y + margin < pipe.gapTop;
