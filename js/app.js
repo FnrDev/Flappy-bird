@@ -112,6 +112,9 @@ function updatePipes() {
     if (pipes[i].x + pipeWidth < 0) {
       pipes.splice(i, 1);
     }
+
+    // change the background when score is multiple
+    currentBg = Math.floor(score / 10) % backgrounds.length;
   }
 }
 
