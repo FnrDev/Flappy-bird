@@ -41,8 +41,8 @@ html, body {
 
 #game-over-text {
     position: absolute;
-    top: 36%;
-    left: 40%;
+    top: 30%;
+    left: 43%;
     color: red;
     font-size: 30px;
     font-weight: bold;

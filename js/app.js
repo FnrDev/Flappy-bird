@@ -187,6 +187,7 @@ function resetGameOverText() {
 
 function showGameOverText() {
   gameOverText.textContent = 'Game Over'
+  gameOverText.style.display = 'block'
 }
 
 function startGame() {
@@ -234,7 +235,6 @@ function keyPress(event) {
 
 playButton.addEventListener('click', startGame)
 window.addEventListener('keydown', (event) => {
-  event.preventDefault()
   keyPress(event)
 })
 
