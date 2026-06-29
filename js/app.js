@@ -35,12 +35,12 @@ let bgX = 0;
 // ---- Load images ----
 // Three backgrounds, used later to swap theme as score increases
 const backgrounds = [];
-["images/bg1.jpg", "images/bg2.png", "images/bg3.jpg"].forEach(src => {
+["images/bg1.jpg", "images/bg2.png", "images/bg3.png"].forEach(src => {
   const img = new Image();
   img.src = src;
   backgrounds.push(img);
 });
-let currentBg = 0; // index into backgrounds[]
+let currentBg = 0
 
 const birdImage = new Image();
 birdImage.src = "images/bird.png";
@@ -113,8 +113,8 @@ function updatePipes() {
       pipes.splice(i, 1);
     }
 
-    // change the background when score is multiple
-    currentBg = Math.floor(score / 10) % backgrounds.length;
+    // change the background when score is multiple of 5
+    currentBg = Math.floor(score / 5) % backgrounds.length;
   }
 }
 
