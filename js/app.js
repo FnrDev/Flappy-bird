@@ -156,6 +156,11 @@ function update() {
 
   if (bird.y + bird.height > canvas.height) {
     endGame()
+    return
+  }
+
+  if (checkPipeCollision()) {
+    endGame()
   }
 
   updatePipes()
@@ -188,6 +193,20 @@ function resetGameOverText() {
 function showGameOverText() {
   gameOverText.textContent = 'Game Over'
   gameOverText.style.display = 'block'
+}
+
+function checkPipeCollision() {
+  const margin = 6;   // shrink hitbox for fairer feel
+  for (const pipe of pipes) {
+    const inPipeX = bird.x + bird.width - margin > pipe.x && bird.x + margin < pipe.x + pipeWidth;
+    const hitTop = bird.y + margin < pipe.gapTop;
+    const hitBottom = bird.y + bird.height - margin > pipe.gapTop + pipeGap;
+
+    if (inPipeX && (hitTop || hitBottom)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function startGame() {
