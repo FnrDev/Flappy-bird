@@ -13,7 +13,8 @@ const pipes = []
 const pipeWidth = 80
 const pipeGap = 200
 const pipeSpacing = 350
-const pipeSpeed = 3
+const basePipeSpeed = 3;
+let pipeSpeed = 3
 let frameCount = 0;
 
 // score
@@ -115,6 +116,7 @@ function updatePipes() {
 
     // change the background when score is multiple of 5
     currentBg = Math.floor(score / 5) % backgrounds.length;
+    pipeSpeed = basePipeSpeed + Math.floor(score / 5) * 0.5 // speed of pipe change every 5 score, to add 0.5 to pipeSpeed
   }
 }
 
@@ -164,6 +166,7 @@ function update() {
 
   if (checkPipeCollision()) {
     endGame()
+    return
   }
 
   updatePipes()
@@ -222,9 +225,11 @@ function startGame() {
   playButton.style.display = "none";
   resetBird();
 
+  // reset values
   pipes.length = 0
   frameCount = 0
   score = 0
+  pipeSpeed = basePipeSpeed
 
   spawnPipe()
 }
