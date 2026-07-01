@@ -2,6 +2,7 @@ const canvas = document.querySelector("#gameCanvas")
 const ctx = canvas.getContext("2d");
 const playButton = document.querySelector("#playButton")
 const gameOverText = document.querySelector('#game-over-text')
+const highestScoreEl = document.querySelector('#highest-score')
 
 // Physics
 const gravity = 0.5;
@@ -19,6 +20,13 @@ let frameCount = 0;
 
 // score
 let score = 0
+
+// timer based on the play game to game end
+let timer = 0
+
+// check score on game load to display highest score
+const highestScore = localStorage.getItem('highestScore') || 0;
+highestScoreEl.innerHTML = `<b>Highest Score:</b> ${highestScore}`
 
 // ---- Make canvas fill the screen ----
 function resizeCanvas() {
@@ -235,7 +243,11 @@ function startGame() {
 }
 
 function endGame() {
-  console.log('end ame')
+  if (score > highestScore) {
+    localStorage.setItem('highestScore', score)
+    highestScoreEl.innerHTML = `<b>Highest Score:</b> ${score}`
+  }
+
   state = 'gameover'
   playButton.style.display = 'block'
   resetBird()

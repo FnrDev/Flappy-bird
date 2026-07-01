@@ -53,3 +53,13 @@ html, body {
     transform: translate(-50%, -48%);
     box-shadow: 0 2px 0 #2e7d32;
 }
+
+#highest-score {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
