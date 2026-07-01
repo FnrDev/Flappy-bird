@@ -26,7 +26,8 @@ let timer = 0
 
 // check score on game load to display highest score
 const highestScore = localStorage.getItem('highestScore') || 0;
-highestScoreEl.innerHTML = `<b>Highest Score:</b> ${highestScore}`
+const highestScoreTimer = Number(localStorage.getItem('highesrScoreTime')) || 0
+highestScoreEl.innerHTML = `<b>Highest Score:</b> ${highestScore} (${highestScoreTimer.toFixed(2)})`
 
 // ---- Make canvas fill the screen ----
 function resizeCanvas() {
@@ -104,8 +105,9 @@ function spawnPipe() {
 }
 
 function updatePipes() {
-  if (frameCount % Math.floor(pipeSpacing / pipeSpeed) === 0) {
-    console.log('spawn pipe')
+  // spawn when the last pipe has moved far enough left
+  const lastPipe = pipes[pipes.length - 1];
+  if (!lastPipe || lastPipe.x < canvas.width - pipeSpacing) {
     spawnPipe()
   }
 
@@ -117,16 +119,15 @@ function updatePipes() {
       score++
     }
 
-    // Remove pipes that have gone off-screen
     if (pipes[i].x + pipeWidth < 0) {
       pipes.splice(i, 1);
     }
 
-    // change the background when score is multiple of 5
     currentBg = Math.floor(score / 5) % backgrounds.length;
-    pipeSpeed = basePipeSpeed + Math.floor(score / 5) * 0.5 // speed of pipe change every 5 score, to add 0.5 to pipeSpeed
+    pipeSpeed = basePipeSpeed + Math.floor(score / 5) * 0.5
   }
 }
+
 
 function drawPipes() {
   pipes.forEach(pipe => {
@@ -158,11 +159,20 @@ function drawScore() {
   ctx.fillText(score, canvas.width / 2, 80);
 }
 
+function drawTimer() {
+  ctx.fillStyle = "red";
+  ctx.font = "bold 30px sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText(`Time: ${(timer.toFixed(2))}s`, 20, 45);
+}
+
+
 // this function will update the Physics variables, to pull the bird down, or make the bird jump
 function update() {
   if (state !== 'playing') return;
 
   frameCount++
+  timer = frameCount / FPS
   bird.velocity += gravity
   if (bird.velocity > maxFall) bird.velocity = maxFall
   bird.y += bird.velocity
@@ -188,6 +198,7 @@ function render() {
     drawPipes()
     drawBird()
     drawScore()
+    drawTimer()
 }
 
 function startLoop() {
@@ -238,13 +249,16 @@ function startGame() {
   frameCount = 0
   score = 0
   pipeSpeed = basePipeSpeed
+  timer = 0
 
   spawnPipe()
 }
 
 function endGame() {
+  // check for score if its higher then save it with the time of the game
   if (score > highestScore) {
     localStorage.setItem('highestScore', score)
+    localStorage.setItem('highesrScoreTime', timer)
     highestScoreEl.innerHTML = `<b>Highest Score:</b> ${score}`
   }
 
