@@ -120,6 +120,7 @@ function updatePipes() {
       score++
     }
 
+    // remove pipe when its outside of screen
     if (pipes[i].x + pipeWidth < 0) {
       pipes.splice(i, 1);
     }
