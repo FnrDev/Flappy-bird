@@ -114,6 +114,7 @@ function updatePipes() {
   for (let i = pipes.length - 1; i >= 0; i--) {
     pipes[i].x -= pipeSpeed;
 
+    // inreamenet score when bird pass the pipe
     if (!pipes[i].passed && pipes[i].x + pipeWidth < bird.x) {
       pipes[i].passed = true
       score++
@@ -235,7 +236,6 @@ function checkPipeCollision() {
 }
 
 function startGame() {
-  console.log(state)
   if (state === 'gameover') {
     resetGameOverText()
   }
