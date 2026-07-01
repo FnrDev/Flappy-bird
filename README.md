@@ -1,5 +1,8 @@
 # Flappy Bird
 
+## Game Link
+https://fnrdev.github.io/Flappy-bird/
+
 ## Technologies Used
 - HTML
 - CSS
