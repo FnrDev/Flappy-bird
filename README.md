@@ -18,7 +18,20 @@ Flappy Bird is a simple side-scrolling game where you control a bird that consta
 - As a user when i progress in score the background (theme) should be changed to a differnt image
 
 ## Screenshots
+- Start Game Screen
+![alt text](image.png)
+
+- Playing Game Screen
+![alt text](image-1.png)
+
+- Game Over Screen
+![alt text](image-2.png)
 
 ## Future Enhancements
+- Add reset button (resets both highest score timer & highest score)
+- Add badges based on the highest score
+- Add get ready countdown
 
 ## Credits
+- [MDN keydown event](https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event)
+- [requestAnimationFrame VS setInterval](https://stackoverflow.com/questions/38709923/why-is-requestanimationframe-better-than-setinterval-or-settimeout)
