@@ -95,7 +95,7 @@ function spawnPipe() {
   // spawn pipe at random position
   const minTop = 80
   const maxTop = canvas.height - pipeGap - 120
-  const gapTop = Math.random() * (maxTop - minTop) + minTop
+  const gapTop = Math.random() * (maxTop - minTop) + minTop // give us a rannge between maxTop and minTop
 
   pipes.push({
     x: canvas.width,
@@ -112,10 +112,10 @@ function updatePipes() {
   }
 
   for (let i = pipes.length - 1; i >= 0; i--) {
-    pipes[i].x -= pipeSpeed;
+    pipes[i].x -= pipeSpeed; // moving pipe to the left, same like background shift to the left
 
     // inreamenet score when bird pass the pipe
-    if (!pipes[i].passed && pipes[i].x + pipeWidth < bird.x) {
+    if (!pipes[i].passed && pipes[i].x + pipeWidth < bird.x) { // check if pipe is past the bird
       pipes[i].passed = true
       score++
     }
@@ -125,6 +125,7 @@ function updatePipes() {
       pipes.splice(i, 1);
     }
 
+    // this can be moved outside the loop
     currentBg = Math.floor(score / 5) % backgrounds.length;
     pipeSpeed = basePipeSpeed + Math.floor(score / 5) * 0.5
   }
